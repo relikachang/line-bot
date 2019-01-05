@@ -39,6 +39,18 @@ def handle_message(event):
     msg = event.message.text
     r = '很抱歉，我聽不懂你說什麼'
 
+    if msg in ['你好棒', '棒']:
+        sticker_message = StickerSendMessage(
+            package_id='1',
+            sticker_id='120'
+        )
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message)
+    return
+
+
     if msg in ['Hi', 'hi', '你好', '您好', '妳好']:
         r = '嗨, 您好'
     elif msg == '早安':
@@ -55,18 +67,7 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=r))
-    return
-
-    if msg in ['你好棒', '棒']:
-    sticker_message = StickerSendMessage(
-    package_id='1',
-    sticker_id='120'
-)
-
-    line_bot_api.reply_message(
-        event.reply_token,
-        sticker_message)
-
+    
 
 if __name__ == "__main__":
     app.run()
